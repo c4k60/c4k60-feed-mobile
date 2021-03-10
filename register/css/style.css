@@ -183,3 +183,49 @@ a {
     cursor: pointer;
     text-decoration: none;
 }
+.loading_popup {
+	background-color: #4080ff;
+	padding: 19px 10px 19px 10px;
+	font-family: -apple-system, sans-serif;
+	color: white;
+	align-content: center;
+	align-items: center;
+	display: none;
+}
+.loading_text {
+	display: inline;
+	margin-top: 1px;
+    margin-left: 7px;
+}
+.error_popup {
+	background-color: #ffebe8;
+    color: #6d220d;
+	border-bottom: 1px solid;
+	padding: 8px;
+	font-family: -apple-system, sans-serif;
+	font-size: 14px;
+	line-height: 18px;
+	border-color: #dd3c10;
+}
+.success_popup {
+	background-color: #e8ffec;
+    color: #0d6d4a;
+	border-bottom: 1px solid;
+	padding: 8px;
+	font-family: -apple-system, sans-serif;
+	font-size: 14px;
+	line-height: 18px;
+	border-color: #26dd10;
+}
+.return_home {
+	padding: 5px 8px;
+	background-color: #fff;
+}
+.return_home_link {
+	cursor: pointer;
+    text-decoration: none;
+    color: #8190b0;
+    font-size: 12px;
+    line-height: 15px;
+    font-family: -apple-system, sans-serif;
+}

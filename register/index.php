@@ -16,7 +16,11 @@ if (!isset($_SESSION['loggedin'])) {
     <title>Tham gia C4K60</title>
   </head>
   <body>
-  	<div class="upper_title_area">
+  	<div class="loading_popup" id="loading">
+  		<img src="assets/spinner.gif" style="width: 20px;">
+  		<div class="loading_text">Chúng tôi đang tạo tài khoản của bạn...</div>
+  	</div>
+  	<div class="upper_title_area" id="upper_title_area">
   		<i class="fas fa-chevron-left" style="display: none;cursor: pointer;" id="prevBtn" onclick="nextPrev(-1)"></i>
   		<div class="upper_title" id="upper_title" style="margin-right: 8px;">Tham gia C4K60</div> <!-- marginRight 31px when chevron display block -->
   	</div>
@@ -32,9 +36,6 @@ if (!isset($_SESSION['loggedin'])) {
   			<div class="name_container">
   				<div class="name_step_label">Họ và tên</div>
   				<input type="text" name="name" id="name_input">
-  				<div class="name_error" id="name_error" style="display: none;">
-  					<div class="name_error_text">Tên bạn là gì?</div>
-  				</div>
   			</div>
   		</div>
   		<div class="multi_step_displayed_step" style="display: none;">
@@ -235,9 +236,6 @@ if (!isset($_SESSION['loggedin'])) {
   			<div class="name_container">
   				<div class="name_step_label">Email</div>
   				<input type="text" name="email" id="name_input">
-  				<div class="name_error" id="name_error" style="display: none;">
-  					<div class="name_error_text">Email của bạn là gì?</div>
-  				</div>
   			</div>
   		</div>
   		<div class="multi_step_displayed_step" style="display: none;">
@@ -333,7 +331,9 @@ function nextPrev(n) {
   // if you have reached the end of the form... :
   if (currentTab >= x.length) {
     //...the form gets submitted:
-    document.getElementById("regForm").submit();
+    // document.getElementById("regForm").submit();
+    showLoadingAndThenSubmit();
+    x[5].style.display = "block";
     return false;
   }
   // Otherwise, display the correct tab:
@@ -350,14 +350,20 @@ function validateForm() {
     // If a field is empty...
     if (y[i].value == "") {
       // add an "invalid" class to the field:
-      document.getElementById("name_error").style.display = "block";
-
       y[i].className += " invalid";
       // and set the current valid status to false:
       valid = false;
     }
   }
   return valid; // return the valid status
+}
+
+function showLoadingAndThenSubmit() {
+	document.getElementById("upper_title_area").style.display = "none";
+	document.getElementById("loading").style.display = "flex";
+	setTimeout(function() {
+  		document.getElementById("regForm").submit();
+	}, 2000);
 }
   	</script>
 </body>
