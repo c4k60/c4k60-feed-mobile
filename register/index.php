@@ -21,7 +21,7 @@ if (!isset($_SESSION['loggedin'])) {
   		<div class="upper_title" id="upper_title" style="margin-right: 8px;">Tham gia C4K60</div> <!-- marginRight 31px when chevron display block -->
   	</div>
   	<div class="content">
-  		<form method="get" action="register.php" id="regForm">
+  		<form method="POST" action="register.php" id="regForm">
   		<div class="multi_step_displayed_step">
   			<div class="your_name_area">
   				<span>Bạn tên gì?</span>
@@ -226,10 +226,67 @@ if (!isset($_SESSION['loggedin'])) {
   			</div>
   		</div>
   		<div class="multi_step_displayed_step" style="display: none;">
-  			2
+  			<div class="your_name_area">
+  				<span>Nhập địa chỉ email của bạn</span>
+  			</div>
+  			<div class="your_name_body_area">
+  				<span class="your_name_body_text">Nhập địa chỉ email để liên hệ với bạn. Bạn có thể ẩn thông tin này trên trang cá nhân sau.</span>
+  			</div>
+  			<div class="name_container">
+  				<div class="name_step_label">Email</div>
+  				<input type="text" name="email" id="name_input">
+  				<div class="name_error" id="name_error" style="display: none;">
+  					<div class="name_error_text">Email của bạn là gì?</div>
+  				</div>
+  			</div>
   		</div>
   		<div class="multi_step_displayed_step" style="display: none;">
-  			3
+  			<div class="your_name_area">
+  				<span>Giới tính của bạn là gì?</span>
+  			</div>
+  			<div class="your_name_body_area">
+  				<span class="your_name_body_text">Về sau, bạn có thể thay đổi những ai nhìn thấy giới tính của mình trên trang cá nhân.</span>
+  			</div>
+  			<div class="gender_select_area">
+  				<div class="gender_select">
+	  				<label for="male">Nam</label>
+	  				<input type="radio" id="male" name="gender" value="male" style="float: right;" checked>
+  				</div>
+  				<div class="gender_select">
+	  				<label for="female">Nữ</label>
+					<input type="radio" id="female" name="gender" value="female" style="float: right;">
+				</div>
+				<div class="gender_select">
+					<label for="other">Khác</label>
+					<input type="radio" id="other" name="gender" value="other" style="float: right;">
+				</div>
+				<div class="other_gender_text">Chọn Khác nếu bạn thuộc giới tính khác hoặc không muốn tiết lộ.</div>
+  			</div>
+  		</div>
+  		<div class="multi_step_displayed_step" style="display: none;">
+  			<div class="your_name_area">
+  				<span>Chọn tên tài khoản</span>
+  			</div>
+  			<div class="your_name_body_area">
+  				<span class="your_name_body_text">Tạo tên tài khoản mới của bạn. Tên tài khoản này dùng để đăng nhập vào C4K60.</span>
+  			</div>
+  			<div class="name_container">
+  				<div class="name_step_label">Tên tài khoản mới</div>
+  				<input type="text" name="username" id="name_input">
+  			</div>
+  		</div>
+  		<div class="multi_step_displayed_step" style="display: none;">
+  			<div class="your_name_area">
+  				<span>Chọn mật khẩu</span>
+  			</div>
+  			<div class="your_name_body_area">
+  				<span class="your_name_body_text">Tạo mật khẩu dài tối thiểu 6 ký tự. Đó phải là mật khẩu mà người khác không thể đoán được.</span>
+  			</div>
+  			<div class="name_container">
+  				<div class="name_step_label">Mật khẩu mới</div>
+  				<input type="text" name="password" id="name_input">
+  				<div class="term">Bằng cách nhấn vào <b>Đăng ký</b>, bạn đồng ý với <a href="/terms">Điều khoản</a>, <a href="/privacy">Chính sách dữ liệu</a> và <a href="/cookies">Chính sách cookie</a> của chúng tôi. Bạn có thể nhận được thông báo của chúng tôi qua email và chọn không nhận bất cứ lúc nào.</div>
+  			</div>
   		</div>
   		<div class="multi_step_next_button_area">
   			<button type="button" class="next_button1" id="next_button1" onclick="nextPrev(1)" value="Tiếp">Tiếp</button>
@@ -294,6 +351,8 @@ function validateForm() {
     if (y[i].value == "") {
       // add an "invalid" class to the field:
       document.getElementById("name_error").style.display = "block";
+
+      y[i].className += " invalid";
       // and set the current valid status to false:
       valid = false;
     }

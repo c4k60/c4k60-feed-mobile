@@ -42,11 +42,13 @@ html, body {
     font-size: 15px;
     line-height: 20px;
 }
+.invalid {
+	background-color: #ffdddd;
+}
 #name_input {
 	padding-right: 0px;
     padding-left: 0px;
     margin-top: 4px;
-    background-color: #fff;
     border: 1px solid #ccd0d5;
     box-shadow: none;
     font-family: -apple-system, sans-serif;
@@ -143,17 +145,41 @@ html, body {
 .day {
 	order: 1;
 	flex: 1 1 auto;
-	margin-bottom: 12px;
 }
 .month {
 	order: 2;
 	flex: 1 1 auto;
 	margin-left: 8px;
-	margin-bottom: 12px;
 }
 .year {
 	order: 3;
 	flex: 1 1 auto;
 	margin-left: 8px;
-	margin-bottom: 12px;
+}
+.gender_select_area {
+	margin-left: 45px;
+	margin-right: 45px;
+	padding-top: 12px;
+	padding-bottom: 4px;
+}
+.gender_select {
+	padding: 6px 0;
+}
+.other_gender_text {
+	margin-top: 12px;
+	color: #606770;
+    font-size: 13px;
+    line-height: 16px;
+}
+.term {
+	color: #90949c;
+	font-size: 12px;
+    line-height: 16px;
+    font-family: -apple-system, sans-serif;
+    margin: 16px 0 0;
+}
+a {
+	color: #576b95;
+    cursor: pointer;
+    text-decoration: none;
 }
