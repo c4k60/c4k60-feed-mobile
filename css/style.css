@@ -35,8 +35,23 @@ html, body {
 	background-color: white;
 	padding-top: 10px;
 	padding-bottom: 10px;
+	text-align: center;
 }
 .newsfeed_icon {
-	filter: invert(71%) sepia(97%) saturate(456%) hue-rotate(4deg) brightness(100%) contrast(105%);
-	height: 20px;
+	color: #a1a5aa;
+	font-size: 20px;
+	flex: 1;
+}
+.friends_icon {
+	color: #a1a5aa;
+	font-size: 20px;
+	flex: 1 1 auto;
+}
+.active {
+	color: #f5d600;
+}
+.chat_icon, .noti_icon, .menu_icon {
+	color: #a1a5aa;
+	font-size: 20px;
+	flex: 1 1 auto;
 }

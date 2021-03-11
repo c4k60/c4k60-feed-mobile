@@ -28,8 +28,11 @@ if (!isset($_SESSION['loggedin'])) {
   		<i class="fas fa-cog" id="setting_icon"></i>
   	</div>
     <div class="navigation_bar">
-      <img src="/assets/newsfeed.png" class="newsfeed_icon active">
-
+    	<i class="fas fa-home newsfeed_icon active"></i>
+    	<i class="fas fa-user-friends friends_icon"></i>
+    	<i class="fas fa-comment chat_icon"></i>
+    	<i class="fas fa-bell noti_icon"></i>
+    	<i class="fas fa-bars menu_icon"></i>
     </div>
   	<div class="content">
 
