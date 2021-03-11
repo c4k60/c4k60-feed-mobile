@@ -1,0 +1,42 @@
+.upper_search_box {
+	background-color: #f5d600;
+	display: flex;
+	padding: 10px;
+}
+html, body {
+	margin: 0;
+}
+.search_box {
+	border-bottom: 1px solid #9d9e57;
+    color: #8e9557;
+	font-family: -apple-system, sans-serif;
+	height: 20px;
+	flex: 1 1 auto;
+	font-size: 14px;
+	text-align: center;
+	margin: 0 18px;
+}
+#profile_icon {
+	flex: 0 1 auto;
+	font-size: 20px;
+	margin-left: 6px;
+}
+#setting_icon {
+	flex: 0 1 auto;
+	font-size: 20px;
+	margin-right: 6px;
+}
+#search_icon {
+	font-size: 15px;
+	margin-right: 5px;
+}
+.navigation_bar {
+	display: flex;
+	background-color: white;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.newsfeed_icon {
+	filter: invert(71%) sepia(97%) saturate(456%) hue-rotate(4deg) brightness(100%) contrast(105%);
+	height: 20px;
+}
