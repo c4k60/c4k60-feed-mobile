@@ -101,25 +101,31 @@ html, body {
     font-size: 12px;
     line-height: 14px;
     margin-top: 4px;
+    text-align: center;
 }
 .story_area {
 	font-family: -apple-system, sans-serif;
 	background: white;
-    margin: 8px 0;
     position: relative;
+    overflow-x: scroll;
+    margin: 0 0 8px 0;
 }
 .story_archive {
 	float: right;
 }
 .profpic {
 	width: 90px;
-    height: 145px;
+    height: 160px;
     object-fit: cover;
     border-radius: 12px;
-    margin-left: 5px;
+    margin-left: 6px;
+    margin-right: 7px;
 }
 .story_header {
 	padding: 8px 5px 8px 8px;
+	font-family: -apple-system, sans-serif;
+	background-color: white;
+	margin-top: 8px;
 }
 .bold_text {
 	font-size: 14px;
@@ -131,6 +137,9 @@ html, body {
 }
 .story_preview {
 	padding-bottom: 6px;
+	display: flex;
+	flex-direction: row;
+	width: 500px;
 }
 .story_archive_icon {
 	height: 12px;
@@ -141,7 +150,195 @@ html, body {
     background-position: -78px -156px;
     display: inline-block;
 }
+.plus_background {
+	height: 40px;
+    width: 40px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    left: 11px;
+    top: 5px;
+    display: flex;
+  	align-items: center;
+  	justify-content: center;
+}
+.plus_icon {
+	background-image: url(/assets/icons_pack_small.png);
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: -84px -121px;
+    height: 20px;
+    width: 20px;
+}
+.add_to_story_area {
+	background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+    color: #fff;
+    position: absolute;
+    height: 35%;
+    left: 6px;
+    bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 90px;
+    border-radius: 12px;
+}
+.add_to_story_text_area {
+	position: absolute;
+  	bottom: 0;
+  	left: 0;
+  	font-size: 12px;
+    line-height: 14px;
+    text-overflow: ellipsis;
+    text-shadow: 0 1px rgb(0 0 0 / 20%);
+    font-weight: bold;
+    margin-left: 8px;
+    margin-bottom: 8px;
+}
+.story1 {
+	display: inline-block;
+}
+.story .story-item {
+	height: 160px;
+    border-radius: 15px;
+    background: #3e7fff;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    color: white;
+	position:relative;
+	font-size:13px;	
+}  
+.story .story-item:before {
+   content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: black;
+    opacity: .2;
+    border-radius: 15px;
+	
+  } 
+.story .story-item span {
+	position:absolute;
+	bottom:0;
+	padding: 8px 7px;
+	font-weight: bold;
+	font-size: 12px;
+}
+.story .owl-stage {
+    right: 15px;
+}
 
-
-
-
+.rounded1 {
+  background-image:url(/images/tunna.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  width:32px;
+  height:32px;
+  margin:5px;
+  position:absolute;
+  border-radius:50%;
+  border:4px solid #3877e1;
+}
+.rounded2 {
+  background-image:url(/images/phatdeptrai.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  width:32px;
+  height:32px;
+  margin:5px;
+  position:absolute;
+  border-radius:50%;
+  border:4px solid #3877e1;
+}
+.rounded3 {
+  background-image:url(/images/ndhai.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  width:32px;
+  height:32px;
+  margin:5px;
+  position:absolute;
+  border-radius:50%;
+  border:4px solid #3877e1;
+}
+.rounded4 {
+  background-image:url(/images/duongthao.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  width:32px;
+  height:32px;
+  margin:5px;
+  position:absolute;
+  border-radius:50%;
+  border:4px solid #3877e1;
+}
+.ninebysixteen {
+    margin-right: 3px;
+    width: 90px;
+    display: inline-block;
+}
+.newsfeed_post {
+	background-color: white;
+}
+.nf_post_avatar {
+	border-radius: 50%;
+	border: 0;
+    display: inline-block;
+    vertical-align: top;
+}
+i.img {
+	-webkit-user-select: none;
+	margin-right: 8px;
+}
+.nf_post_avatar_area, .nf_post_header_info {
+	display: inline-block;
+}
+.newsfeed {
+	font-family: -apple-system, sans-serif;
+}
+.nf_post_header_area {
+    line-height: 17px;
+    margin: 0 0 12px;
+    padding: 10px 10px 0;
+    display: flex;
+}
+.nf_post_name {
+	font-weight: bold;
+	font-size: 14px;
+	text-decoration: none;
+	color: black;
+}
+.nf_post_header_info {
+	align-items: center;
+	align-self: center;
+}
+.nf_post_time {
+	color: #90949c;
+	text-decoration: none;
+	font-size: 12px;
+}
+.dot {
+	color: #90949c;
+}
+.audience_icon {
+	font-size: 11px;
+	color: #90949c;
+}
+.nf_post_caption {
+	margin: 8px 0;
+	padding: 0 10px;
+}
+p {
+	margin: 0;
+}
+.nf_post_image {
+	width: 100%;
+}
