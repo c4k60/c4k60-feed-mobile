@@ -18,7 +18,7 @@ if (!isset($_SESSION['loggedin'])) {
     <script src="https://kit.fontawesome.com/5468db3c8c.js" crossorigin="anonymous"></script>
     <title>C4K60 Feed</title>
   </head>
-  <body style="background-color: rgb(218, 221, 225);">
+  <body style="background-color: rgb(218, 221, 225);" ontouchstart="">
   	<div class="upper_search_box">
   		<i class="fas fa-user-circle" id="profile_icon"></i>
   		<div class="search_box">
@@ -103,17 +103,35 @@ if (!isset($_SESSION['loggedin'])) {
   					<p>Xin chào các cháu đã quay trở lại kênh của bà tân vê lốc</p>
   				</div>
   				<div class="nf_post_image_area">
-  					<a href="/post"></a>
   					<img src="/images/batan.jpg" class="nf_post_image">
   				</div>
   			</div>
-  			<footer class="nf_post_reaction">
-  				<hr>
-  				Thích
-  				Bình luận
-  				<hr>
+  			<footer class="nf_post_reaction_area">
+          <div class="nf_post_reaction">
+            <div id="like_area" class="nf_post_like" onclick="post1_like()">
+              <i id="like" class="far fa-thumbs-up react"></i> Thích
+            </div>
+            <div class="nf_post_comment">
+              <i class="far fa-comment react"></i> Bình luận
+            </div>
+            <div class="nf_post_share">
+              <i class="far fa-share-square react"></i> Chia sẻ
+            </div>
+          </div>
   			</footer>
+        <script type="text/javascript">
+          function post1_like() {
+            document.getElementById('like').classList.toggle('fas');
+            document.getElementById('like_area').classList.toggle('liked');
+          }
+        </script>
   		</div>
+      <center style="margin-bottom: 20px">
+        <br>
+        <img src="/images/pingpong.png" style="height: 50px;">
+        <br>
+        <p style="color: grey;font-size: 13px;">Có vẻ như không còn bài viết nào.</p>
+      </center>
   	</div>
   </body>
 </html>
