@@ -91,7 +91,6 @@ html, body {
 	color: #6f7278;
 }
 .wdyt_photo_icon_area {
-	display: inline-block;
 	display: flex;
 	flex-direction: column;
 	align-self: center;
@@ -304,6 +303,7 @@ i.img {
 }
 .newsfeed {
 	font-family: -apple-system, sans-serif;
+	display: none;
 }
 .nf_post_header_area {
     line-height: 17px;
@@ -346,25 +346,11 @@ p {
 }
 hr {
   border: 0;
-  border-top: 2px solid rgba(0,0,0,.1);
+  border-top: 1px solid #ced0d4;
   box-sizing: content-box;
   height: 0;
   overflow: visible;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-top: 0px;
-}
-.nf_post_reaction::before {
   margin: 0 10px;
-  background-color: #ced0d4;
-  content: '';
-  display: block;
-  height: 1px;
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-  z-index: 0;
 }
 .nf_post_reaction {
   display: flex;
@@ -417,4 +403,71 @@ hr {
 }
 .liked {
   color: #e6cc19;
+}
+.user_liked {
+	margin: 10px;
+	font-size: 14px;
+	color: #616770;
+}
+.fa-stack {
+	font-size: 0.55rem;
+	color: #e6cc19;
+}
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+.story_shimmer {
+	background: #fff;
+	margin: 8px 0;
+	padding: 14px 7px 10px;
+	display: block;
+}
+.story_shimmer_header {
+	background: #ebedf0;
+    height: 8px;
+    width: 50px;
+}
+.story_shimmer_body_1 {
+	border-radius: 12px;
+    height: 160px;
+    margin: 16px 6px 0 0;
+    width: 90px;
+    background: #ebedf0;
+    display: inline-block;
+}
+.story_shimmer_body_2 {
+	border-radius: 12px;
+    height: 160px;
+    margin: 16px 6px 0 0;
+    width: 90px;
+    background: #ebedf0;
+    display: inline-block;
+}
+.story_shimmer_body_3 {
+	border-radius: 12px;
+    height: 160px;
+    margin: 16px 6px 0 0;
+    width: 90px;
+    background: #ebedf0;
+    display: inline-block;
+}
+.story_header, .story_area {
+	display: none;
+}
+.top_of_newsfeed {
+    width: 100%;
+    color: gray;
+    font-family: -apple-system, sans-serif;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.loading {
+	display: inline-block;
+	margin-left: 6px;
 }
