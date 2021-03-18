@@ -52,10 +52,48 @@ function number_format_short( $n, $precision = 1 ) {
     <link rel="stylesheet" href="css/style.css">
     <script src="https://kit.fontawesome.com/5468db3c8c.js" crossorigin="anonymous"></script>
     <!-- Moment JS -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment-with-locales.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/locale/vi.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment-with-locales.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/locale/vi.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
     <title>C4K60 Feed</title>
+    <script type="text/javascript">
+      function kFormatter(num) {
+        return Math.abs(num) > 999 ? Math.sign(num)*((Math.abs(num)/1000).toFixed(1)) + 'K' : Math.sign(num)*Math.abs(num)
+      }
+      function addLikes(id,action) {
+        $.ajax({
+        url: "like.php",
+        data:'post_id='+id+'&action='+action,
+        type: "POST",
+        success: function(data){
+        var likes = parseInt($('#likes-'+id).val());
+        switch(action) {
+          case "like":
+          $('#like_area'+id).html('<i id="like'+id+'" class="fas fa-thumbs-up react"></i> Thích');
+          $('#like_area'+id).attr("onclick", "addLikes("+id+",'unlike')");
+          likes = likes+1;
+          $('#like_area'+id).addClass("liked");
+          break;
+          case "unlike":
+          $('#like_area'+id).html('<i id="like'+id+'" class="far fa-thumbs-up react"></i> Thích');
+          $('#like_area'+id).attr("onclick", "addLikes("+id+",'like')");
+          $('#like_area'+id).removeClass("liked");
+          likes = likes-1;
+          break;
+        }
+        
+        $('#likes-'+id).val(likes);
+        if(likes>0) {
+          $('#people_liked'+id).html(kFormatter(likes));
+          $('#user_liked'+id).attr("style", "display:block;");
+        } else {
+          $('#user_liked'+id).attr("style", "display:none;");
+        }
+        }
+        });
+      }
+    </script>
   </head>
   <body class="noselect" style="background-color: rgb(218, 221, 225);" ontouchstart>
   	<div class="upper_search_box">
@@ -134,7 +172,14 @@ function number_format_short( $n, $precision = 1 ) {
    	</div>
   	<div class="newsfeed" id="newsfeed">
 <?php
-$sql = "SELECT * FROM tintuc_posts ORDER BY id DESC";
+$sql = "SELECT tintuc_posts.id, tintuc_posts.author, tintuc_posts.content, tintuc_posts.timeofpost, tintuc_posts.has_comment, tintuc_posts.avatar, tintuc_posts.has_image, tintuc_posts.image, tintuc_posts.username, tintuc_posts.c4id, COUNT(tintuc_post_likes.like_id) as likes, GROUP_CONCAT(accounts.name separator '|') as liked_by
+        FROM tintuc_posts
+        LEFT JOIN tintuc_post_likes
+        ON tintuc_posts.id = tintuc_post_likes.liked_post_id
+        LEFT JOIN accounts
+        ON tintuc_post_likes.username_of_like = accounts.username
+        GROUP BY tintuc_posts.id
+        ORDER BY tintuc_posts.id DESC";
 $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) > 0) {
  while($row = mysqli_fetch_assoc($result)) {
@@ -170,11 +215,12 @@ if (mysqli_num_rows($result) > 0) {
 					  <i class="fas fa-circle fa-stack-2x backlike"></i>
 					  <i class="fas fa-thumbs-up fa-stack-1x fa-inverse"></i>
 					</span>
-  					<span id="people_liked<?php echo $row['id'] ?>"><?php echo number_format_short($row['like_count']) ?></span>
+  					<span id="people_liked<?php echo $row['id'] ?>"><?php echo number_format_short($row['likes']) ?></span>
   				</div>
   				<hr>
+          <input type="hidden" id="likes-<?php echo $row['id']; ?>" value="<?php echo $row['likes']; ?>">
 	          	<div class="nf_post_reaction">
-	            	<div id="like_area<?php echo $row['id'] ?>" class="nf_post_like" onclick="post<?php echo $row['id'] ?>_like()">
+	            	<div id="like_area<?php echo $row['id'] ?>" onclick="addLikes(<?php echo $row['id'] ?>, 'like'); post<?php echo $row['id'] ?>_like();" class="nf_post_like">
 	              		<i id="like<?php echo $row['id'] ?>" class="far fa-thumbs-up react"></i> Thích
 	            	</div>
 	            	<div class="nf_post_comment">
@@ -187,38 +233,26 @@ if (mysqli_num_rows($result) > 0) {
   			</footer>
         <script type="text/javascript">
           function post<?php echo $row['id'] ?>_like() {
-            document.getElementById('like<?php echo $row['id'] ?>').classList.toggle('fas');
-            document.getElementById('like_area<?php echo $row['id'] ?>').classList.toggle('liked');
             var x = document.getElementById("people_liked<?php echo $row['id'] ?>");
-            var y = document.getElementById("user_liked<?php echo $row['id'] ?>");
             if (x.innerHTML === "0") {
-	            if (x.innerHTML === "<?php echo number_format_short($row['like_count']) ?>") {
-				   	x.innerHTML = "<?php echo $_SESSION['name'] ?>";
-				} else {
-				    x.innerHTML = "<?php echo number_format_short($row['like_count']) ?>";
-				}
-			} else if (x.innerHTML === "<?php echo $_SESSION['name'] ?>") {
-				if (x.innerHTML === "<?php echo number_format_short($row['like_count']) ?>") {
-				   	x.innerHTML = "<?php echo $_SESSION['name'] ?>";
-				} else {
-				    x.innerHTML = "<?php echo number_format_short($row['like_count']) ?>";
-				}
-			} else {
-				if (x.innerHTML === "<?php echo number_format_short($row['like_count']) ?>") {
-				   	x.innerHTML = "Bạn và <?php echo number_format_short($row['like_count']) ?> người khác";
-				} else {
-				    x.innerHTML = "<?php echo number_format_short($row['like_count']) ?>";
-				}
-			}
-			if (x.innerHTML === "0") {
-				if (y.style.display === "none") {
-					y.style.display = "block";
-				} else {
-					y.style.display = "none";
-				}
-			} else {
-				y.style.display = "block";
-			}
+	            if (x.innerHTML === "<?php echo number_format_short($row['likes']) ?>") {
+    				   	x.innerHTML = "<?php echo $_SESSION['name'] ?>";
+    				  } else {
+				    x.innerHTML = "<?php echo number_format_short($row['likes']) ?>";
+				      }
+			      } else if (x.innerHTML === "<?php echo $_SESSION['name'] ?>") {
+      				if (x.innerHTML === "<?php echo number_format_short($row['likes']) ?>") {
+      				   	x.innerHTML = "<?php echo $_SESSION['name'] ?>";
+      				} else {
+      				    x.innerHTML = "<?php echo number_format_short($row['likes']) ?>";
+      				}
+      			} else {
+      				if (x.innerHTML === "<?php echo number_format_short($row['likes']) ?>") {
+      				   	x.innerHTML = "Bạn và <?php echo number_format_short($row['likes']) ?> người khác";
+      				} else {
+      				    x.innerHTML = "<?php echo number_format_short($row['likes']) ?>";
+      				}
+			      }
           }
           if (document.getElementById("people_liked<?php echo $row['id'] ?>").innerHTML != 0) {
           	document.getElementById("user_liked<?php echo $row['id'] ?>").style.display = "block";

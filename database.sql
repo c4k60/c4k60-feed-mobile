@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th3 18, 2021 lúc 12:19 AM
--- Phiên bản máy phục vụ: 10.4.17-MariaDB
--- Phiên bản PHP: 8.0.1
+-- Máy chủ: localhost
+-- Thời gian đã tạo: Th3 18, 2021 lúc 11:45 AM
+-- Phiên bản máy phục vụ: 10.4.14-MariaDB
+-- Phiên bản PHP: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -71,6 +71,51 @@ INSERT INTO `accounts` (`id`, `username`, `password`, `email`, `name`, `gender`,
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `articles`
+--
+
+CREATE TABLE `articles` (
+  `id` int(11) NOT NULL,
+  `title` text DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `articles`
+--
+
+INSERT INTO `articles` (`id`, `title`) VALUES
+(1, 'Ajax Jquery Drag and Drop Shopping Cart using PHP Mysql'),
+(2, 'Make PHP Hashtag system by using Regular Expression'),
+(3, 'Ajax Jquery Column Sort with PHP & MySql'),
+(4, 'Drag and drop Upload multiples File By Ajax JQuery PHP');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `article_likes`
+--
+
+CREATE TABLE `article_likes` (
+  `id` int(11) NOT NULL,
+  `user` int(11) NOT NULL,
+  `article` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `article_likes`
+--
+
+INSERT INTO `article_likes` (`id`, `user`, `article`) VALUES
+(46, 2, 2),
+(47, 2, 1),
+(48, 2, 3),
+(52, 1, 4),
+(50, 1, 1),
+(51, 1, 2);
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `images_upload`
 --
 
@@ -92,39 +137,6 @@ INSERT INTO `images_upload` (`id`, `c4id`, `username`, `filename`, `time_of_uplo
 (2, 25896, 'tunnaduong', '/images/PHQ_2410-min.jpg', '2021-02-07 18:24:43', ''),
 (3, 53132, 'tunnaduong', 'images/pink-flower-tree-facebook-cover-photo.jpg', '2021-02-07 21:01:43', 'sdsd'),
 (5, 12806, 'tunnaduong', '/images/default_pic.jpg', '2021-02-07 21:15:42', 'concac');
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `like_unlike`
---
-
-CREATE TABLE `like_unlike` (
-  `id` int(11) NOT NULL,
-  `userid` int(11) NOT NULL,
-  `postid` int(11) NOT NULL,
-  `type` int(2) NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Đang đổ dữ liệu cho bảng `like_unlike`
---
-
-INSERT INTO `like_unlike` (`id`, `userid`, `postid`, `type`, `timestamp`) VALUES
-(1, 1, 1, 1, '2018-02-21 08:29:39'),
-(2, 2, 1, 1, '2018-02-21 08:45:51'),
-(3, 3, 1, 0, '2018-02-21 08:51:02'),
-(4, 4, 1, 1, '2018-02-21 08:50:56'),
-(6, 5, 2, 1, '2021-03-16 09:34:07'),
-(7, 3, 3, 1, '2018-02-21 09:11:56'),
-(8, 4, 2, 0, '2018-02-21 09:11:56'),
-(9, 6, 1, 1, '2018-02-21 09:11:56'),
-(10, 7, 2, 0, '2018-02-21 09:11:56'),
-(11, 9, 2, 1, '2018-02-21 09:11:56'),
-(12, 5, 3, 1, '2021-03-16 09:34:11'),
-(13, 5, 1, 1, '2021-03-16 09:34:04'),
-(14, 5, 5, 3, '2021-03-16 09:51:38');
 
 -- --------------------------------------------------------
 
@@ -185,28 +197,6 @@ INSERT INTO `messages` (`id`, `body`, `user_from`, `user_to`, `date_sent`) VALUE
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `posts`
---
-
-CREATE TABLE `posts` (
-  `id` int(11) NOT NULL,
-  `title` varchar(100) NOT NULL,
-  `content` text NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Đang đổ dữ liệu cho bảng `posts`
---
-
-INSERT INTO `posts` (`id`, `title`, `content`, `timestamp`) VALUES
-(1, 'Yes, except the Dave Matthews Band doesn\'t rock.', 'The alien mothership is in orbit here. If we can hit that bullseye, the rest of the dominoes will fall like a house of cards. Checkmate. If rubbin\' frozen dirt in your crotch is wrong, hey I don\'t wanna be right.', '2018-02-19 19:29:46'),
-(2, 'Saving the world with meals on wheels.', 'You know how I sometimes have really brilliant ideas? Heh-haa! Super squeaky bum time! I\'m the Doctor. Well, they call me the Doctor. I don\'t know why. I call me the Doctor too. I still don\'t know why.', '2018-02-19 19:29:46'),
-(3, 'Tell him time is of the essence.', 'This man is a knight in shining armor. Watching ice melt. This is fun. Tell him time is of the essence. This man is a knight in shining armor. You look perfect. He taught me a code. To survive.', '2018-02-19 19:34:41');
-
--- --------------------------------------------------------
-
---
 -- Cấu trúc bảng cho bảng `tintuc_posts`
 --
 
@@ -220,23 +210,22 @@ CREATE TABLE `tintuc_posts` (
   `has_image` varchar(7) NOT NULL,
   `image` varchar(999) NOT NULL,
   `username` varchar(99) NOT NULL,
-  `c4id` int(5) NOT NULL,
-  `like_count` int(11) NOT NULL
+  `c4id` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `tintuc_posts`
 --
 
-INSERT INTO `tintuc_posts` (`id`, `author`, `content`, `timeofpost`, `has_comment`, `avatar`, `has_image`, `image`, `username`, `c4id`, `like_count`) VALUES
-(25, 'Dương Tùng Anh', 'Hôm nay là một ngày đẹp trời!', '2021-02-06 10:07:03', 'no', '/images/tunna.jpg', 'none', ' images/', 'tunnaduong', 0, 0),
-(27, 'Dương Tùng Anh', 'spam cực dài\r\nspam cực dài\r\nspam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dài', '2021-02-06 13:40:47', 'no', '/images/tunna.jpg', 'none', ' images/', 'tunnaduong', 0, 0),
-(28, 'Dương Tùng Anh', 'spam again :>', '2021-02-06 13:42:06', 'no', '/images/tunna.jpg', 'none', ' images/', 'tunnaduong', 0, 9122343),
-(31, 'Dương Tùng Anh', 't', '2021-02-06 17:13:06', 'no', '/images/tunna.jpg', 'none', ' images/', 'tunnaduong', 0, 0),
-(39, 'Dương Tùng Anh', 'sdsd', '2021-02-07 21:15:12', 'no', '/images/tunna.jpg', 'none', ' /images/', 'tunnaduong', 0, 0),
-(41, 'Dương Tùng Anh', 'wtf is going on', '2021-02-13 22:42:46', 'no', '/images/tunna.jpg', 'none', ' /images/', 'tunnaduong', 0, 1023),
-(42, 'Hoàng Phát', 'Tôi bị điên bẩm sinh', '2021-02-28 21:41:14', 'no', '/images/phatdeptrai.jpg', 'none', ' /images/', 'hoangphat', 0, 0),
-(43, 'Hoàng Phát', '1 like mai nghỉ học', '2021-02-28 21:46:30', 'no', '/images/phatdeptrai.jpg', 'none', ' /images/', 'hoangphat', 0, 11);
+INSERT INTO `tintuc_posts` (`id`, `author`, `content`, `timeofpost`, `has_comment`, `avatar`, `has_image`, `image`, `username`, `c4id`) VALUES
+(25, 'Dương Tùng Anh', 'Hôm nay là một ngày đẹp trời!', '2021-02-06 10:07:03', 'no', '/images/tunna.jpg', 'none', ' images/', 'tunnaduong', 0),
+(27, 'Dương Tùng Anh', 'spam cực dài\r\nspam cực dài\r\nspam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dài', '2021-02-06 13:40:47', 'no', '/images/tunna.jpg', 'none', ' images/', 'tunnaduong', 0),
+(28, 'Dương Tùng Anh', 'spam again :>', '2021-02-06 13:42:06', 'no', '/images/tunna.jpg', 'none', ' images/', 'tunnaduong', 0),
+(31, 'Dương Tùng Anh', 't', '2021-02-06 17:13:06', 'no', '/images/tunna.jpg', 'none', ' images/', 'tunnaduong', 0),
+(39, 'Dương Tùng Anh', 'sdsd', '2021-02-07 21:15:12', 'no', '/images/tunna.jpg', 'none', ' /images/', 'tunnaduong', 0),
+(41, 'Dương Tùng Anh', 'wtf is going on', '2021-02-13 22:42:46', 'no', '/images/tunna.jpg', 'none', ' /images/', 'tunnaduong', 0),
+(42, 'Hoàng Phát', 'Tôi bị điên bẩm sinh', '2021-02-28 21:41:14', 'no', '/images/phatdeptrai.jpg', 'none', ' /images/', 'hoangphat', 0),
+(43, 'Hoàng Phát', '1 like mai nghỉ học', '2021-02-28 21:46:30', 'no', '/images/phatdeptrai.jpg', 'none', ' /images/', 'hoangphat', 0);
 
 -- --------------------------------------------------------
 
@@ -247,9 +236,37 @@ INSERT INTO `tintuc_posts` (`id`, `author`, `content`, `timeofpost`, `has_commen
 CREATE TABLE `tintuc_post_likes` (
   `like_id` int(11) NOT NULL,
   `username_of_like` varchar(99) NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `liked_post_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `tintuc_post_likes`
+--
+
+INSERT INTO `tintuc_post_likes` (`like_id`, `username_of_like`, `liked_post_id`) VALUES
+(158, 'tunnaduong', 41),
+(159, 'tunnaduong', 42),
+(160, 'tunnaduong', 42),
+(162, 'tunnaduong', 43);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `user`
+--
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `name` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `user`
+--
+
+INSERT INTO `user` (`id`, `name`) VALUES
+(1, 'john'),
+(2, 'jack');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -262,15 +279,21 @@ ALTER TABLE `accounts`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `images_upload`
+-- Chỉ mục cho bảng `articles`
 --
-ALTER TABLE `images_upload`
+ALTER TABLE `articles`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `like_unlike`
+-- Chỉ mục cho bảng `article_likes`
 --
-ALTER TABLE `like_unlike`
+ALTER TABLE `article_likes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `images_upload`
+--
+ALTER TABLE `images_upload`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -280,15 +303,21 @@ ALTER TABLE `messages`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `posts`
---
-ALTER TABLE `posts`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Chỉ mục cho bảng `tintuc_posts`
 --
 ALTER TABLE `tintuc_posts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `tintuc_post_likes`
+--
+ALTER TABLE `tintuc_post_likes`
+  ADD PRIMARY KEY (`like_id`);
+
+--
+-- Chỉ mục cho bảng `user`
+--
+ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -302,16 +331,22 @@ ALTER TABLE `accounts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
+-- AUTO_INCREMENT cho bảng `articles`
+--
+ALTER TABLE `articles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT cho bảng `article_likes`
+--
+ALTER TABLE `article_likes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+
+--
 -- AUTO_INCREMENT cho bảng `images_upload`
 --
 ALTER TABLE `images_upload`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT cho bảng `like_unlike`
---
-ALTER TABLE `like_unlike`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT cho bảng `messages`
@@ -320,16 +355,22 @@ ALTER TABLE `messages`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
--- AUTO_INCREMENT cho bảng `posts`
---
-ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
 -- AUTO_INCREMENT cho bảng `tintuc_posts`
 --
 ALTER TABLE `tintuc_posts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+--
+-- AUTO_INCREMENT cho bảng `tintuc_post_likes`
+--
+ALTER TABLE `tintuc_post_likes`
+  MODIFY `like_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
+
+--
+-- AUTO_INCREMENT cho bảng `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
