@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: localhost
--- Thời gian đã tạo: Th3 18, 2021 lúc 11:45 AM
--- Phiên bản máy phục vụ: 10.4.14-MariaDB
--- Phiên bản PHP: 7.2.34
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th3 18, 2021 lúc 04:04 PM
+-- Phiên bản máy phục vụ: 10.4.17-MariaDB
+-- Phiên bản PHP: 8.0.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -67,51 +67,6 @@ INSERT INTO `accounts` (`id`, `username`, `password`, `email`, `name`, `gender`,
 (4, 'hoangphat', '$2y$10$44n5FdqIuWZX.anibvSO1ORpRqlACEXanLLwDb2aV6FNpQsM7WQtS', 'hoangphata1k60@gmail.com', 'Hoàng Phát', 'male', '2003-05-19', '', 'user', '', '', '/images/phatdeptrai.jpg', '2021-02-05', 'no', '', '', '', '', '', 0, '', '', 'none', '', 0, 0, 0),
 (5, 'tunganh03', '$2y$10$wJx15d.OCO1z8i3HcPS/3eZSqb4REuOoSCxo.ED4j416yApECyKOy', 'tunganhdeptrai@gmail.com', 'Anh tùng', 'male', '2003-11-21', '', 'user', '', '', '/images/default_pic.jpg', '2021-02-05', 'no', '', '', '', '', '', 0, '', '', 'none', '', 0, 0, 0),
 (18, 'ndhai', '$2y$10$O8o4gbJvG9IpdP5/LXcGn.kgLMY3BC66il0XWLD2Ilct77C3z/ngu', 'luongminh478@gmail.com', 'Nguyễn Đặng Hải', 'male', '2003-12-10', '', 'user', '', '', '/images/default_pic.jpg', '2021-03-10', 'no', '', '', '', '', '', 0, '', '', 'none', '', 0, 0, 0);
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `articles`
---
-
-CREATE TABLE `articles` (
-  `id` int(11) NOT NULL,
-  `title` text DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Đang đổ dữ liệu cho bảng `articles`
---
-
-INSERT INTO `articles` (`id`, `title`) VALUES
-(1, 'Ajax Jquery Drag and Drop Shopping Cart using PHP Mysql'),
-(2, 'Make PHP Hashtag system by using Regular Expression'),
-(3, 'Ajax Jquery Column Sort with PHP & MySql'),
-(4, 'Drag and drop Upload multiples File By Ajax JQuery PHP');
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `article_likes`
---
-
-CREATE TABLE `article_likes` (
-  `id` int(11) NOT NULL,
-  `user` int(11) NOT NULL,
-  `article` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Đang đổ dữ liệu cho bảng `article_likes`
---
-
-INSERT INTO `article_likes` (`id`, `user`, `article`) VALUES
-(46, 2, 2),
-(47, 2, 1),
-(48, 2, 3),
-(52, 1, 4),
-(50, 1, 1),
-(51, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -244,29 +199,17 @@ CREATE TABLE `tintuc_post_likes` (
 --
 
 INSERT INTO `tintuc_post_likes` (`like_id`, `username_of_like`, `liked_post_id`) VALUES
-(158, 'tunnaduong', 41),
-(159, 'tunnaduong', 42),
-(160, 'tunnaduong', 42),
-(162, 'tunnaduong', 43);
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `user`
---
-
-CREATE TABLE `user` (
-  `id` int(11) NOT NULL,
-  `name` text NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Đang đổ dữ liệu cho bảng `user`
---
-
-INSERT INTO `user` (`id`, `name`) VALUES
-(1, 'john'),
-(2, 'jack');
+(186, 'tunnaduong', 43),
+(187, 'tunnaduong', 42),
+(188, 'tunnaduong', 39),
+(190, 'tunganh03', 42),
+(192, 'tunganh03', 27),
+(198, 'tunganh03', 43),
+(204, 'tunganh03', 39),
+(205, 'tunganh03', 31),
+(206, 'tunganh03', 28),
+(207, 'tunganh03', 41),
+(208, 'tunganh03', 25);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -276,18 +219,6 @@ INSERT INTO `user` (`id`, `name`) VALUES
 -- Chỉ mục cho bảng `accounts`
 --
 ALTER TABLE `accounts`
-  ADD PRIMARY KEY (`id`);
-
---
--- Chỉ mục cho bảng `articles`
---
-ALTER TABLE `articles`
-  ADD PRIMARY KEY (`id`);
-
---
--- Chỉ mục cho bảng `article_likes`
---
-ALTER TABLE `article_likes`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -315,12 +246,6 @@ ALTER TABLE `tintuc_post_likes`
   ADD PRIMARY KEY (`like_id`);
 
 --
--- Chỉ mục cho bảng `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
-
---
 -- AUTO_INCREMENT cho các bảng đã đổ
 --
 
@@ -329,18 +254,6 @@ ALTER TABLE `user`
 --
 ALTER TABLE `accounts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
---
--- AUTO_INCREMENT cho bảng `articles`
---
-ALTER TABLE `articles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT cho bảng `article_likes`
---
-ALTER TABLE `article_likes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT cho bảng `images_upload`
@@ -364,13 +277,7 @@ ALTER TABLE `tintuc_posts`
 -- AUTO_INCREMENT cho bảng `tintuc_post_likes`
 --
 ALTER TABLE `tintuc_post_likes`
-  MODIFY `like_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
-
---
--- AUTO_INCREMENT cho bảng `user`
---
-ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `like_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=209;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -215,12 +215,25 @@ if (mysqli_num_rows($result) > 0) {
 					  <i class="fas fa-circle fa-stack-2x backlike"></i>
 					  <i class="fas fa-thumbs-up fa-stack-1x fa-inverse"></i>
 					</span>
+          <?php
+                $liked = explode("|", $row["liked_by"]);  
+                foreach($liked as $like)  
+                {  
+                     if ($like == $_SESSION['name']) {
+                        echo '<script>
+                        $( document ).ready(function() {
+                        $(\'#like_area'.$row['id'].'\').html(\'<i id="like'.$row['id'].'" class="fas fa-thumbs-up react"></i> Thích\');$(\'#like_area'.$row['id'].'\').attr("onclick", "addLikes('.$row['id'].',\'unlike\')");$(\'#like_area'.$row['id'].'\').addClass("liked");
+                        });
+                        </script>';
+                     }  
+                }  
+            ?>
   					<span id="people_liked<?php echo $row['id'] ?>"><?php echo number_format_short($row['likes']) ?></span>
   				</div>
   				<hr>
           <input type="hidden" id="likes-<?php echo $row['id']; ?>" value="<?php echo $row['likes']; ?>">
 	          	<div class="nf_post_reaction">
-	            	<div id="like_area<?php echo $row['id'] ?>" onclick="addLikes(<?php echo $row['id'] ?>, 'like'); post<?php echo $row['id'] ?>_like();" class="nf_post_like">
+	            	<div id="like_area<?php echo $row['id'] ?>" onclick="addLikes(<?php echo $row['id'] ?>, 'like')" class="nf_post_like">
 	              		<i id="like<?php echo $row['id'] ?>" class="far fa-thumbs-up react"></i> Thích
 	            	</div>
 	            	<div class="nf_post_comment">
@@ -232,28 +245,6 @@ if (mysqli_num_rows($result) > 0) {
 	          	</div>
   			</footer>
         <script type="text/javascript">
-          function post<?php echo $row['id'] ?>_like() {
-            var x = document.getElementById("people_liked<?php echo $row['id'] ?>");
-            if (x.innerHTML === "0") {
-	            if (x.innerHTML === "<?php echo number_format_short($row['likes']) ?>") {
-    				   	x.innerHTML = "<?php echo $_SESSION['name'] ?>";
-    				  } else {
-				    x.innerHTML = "<?php echo number_format_short($row['likes']) ?>";
-				      }
-			      } else if (x.innerHTML === "<?php echo $_SESSION['name'] ?>") {
-      				if (x.innerHTML === "<?php echo number_format_short($row['likes']) ?>") {
-      				   	x.innerHTML = "<?php echo $_SESSION['name'] ?>";
-      				} else {
-      				    x.innerHTML = "<?php echo number_format_short($row['likes']) ?>";
-      				}
-      			} else {
-      				if (x.innerHTML === "<?php echo number_format_short($row['likes']) ?>") {
-      				   	x.innerHTML = "Bạn và <?php echo number_format_short($row['likes']) ?> người khác";
-      				} else {
-      				    x.innerHTML = "<?php echo number_format_short($row['likes']) ?>";
-      				}
-			      }
-          }
           if (document.getElementById("people_liked<?php echo $row['id'] ?>").innerHTML != 0) {
           	document.getElementById("user_liked<?php echo $row['id'] ?>").style.display = "block";
           }
