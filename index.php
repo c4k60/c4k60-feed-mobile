@@ -116,7 +116,7 @@ function number_format_short( $n, $precision = 1 ) {
     </div>
     <div class="what_do_you_think">
       <img src="<?php echo $_SESSION['profile_pic'] ?>" class="profile_pic_wdyt">
-      <div class="wdyt_box">Bạn đang nghĩ gì?</div>
+      <div class="wdyt_box" onclick="location.href='composer.php'">Bạn đang nghĩ gì?</div>
       <div class="wdyt_photo_icon_area">
         <i class="far fa-images wdyt_photo_icon"></i>
         <div class="wdyt_photo_text">Hình ảnh</div>
