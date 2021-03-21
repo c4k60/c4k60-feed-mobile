@@ -26,7 +26,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/require/serverconnect.php';
   </head>
   <body class="noselect" style="background-color: white;" ontouchstart>
   	<div class="upper_back_bar">
-      <img class="left_arrow" src="/assets/left-arrow.png">
+      <img class="left_arrow" src="/assets/left-arrow.png" onclick="window.history.back();">
       <div class="create_post_text">Tạo bài viết</div>
       <button type="submit" class="post_button">Đăng</button>
     </div>
@@ -44,17 +44,33 @@ require $_SERVER['DOCUMENT_ROOT'] . '/require/serverconnect.php';
     <div class="what_do_you_think">
       <textarea placeholder="Bạn đang nghĩ gì?"></textarea>
     </div>
-    <div class="photo widget">
+    <div class="post_style">
+      <div class="no_style post_style_div"></div>
+      <div class="solid_orange post_style_div"></div>
+      <div class="gradient post_style_div"></div>
+      <div class="float post_style_div"></div>
+      <div class="space post_style_div"></div>
+      <div class="love post_style_div"></div>
+      <div class="haha post_style_div"></div>
+    </div>
+    <div class="photo">
       <i class="photo_icon"></i>
       <div class="photo_text">Ảnh</div>
     </div>
-    <div class="tag widget">
+    <div class="tag">
       <i class="tag_icon"></i>
       <div class="tag_text">Gắn thẻ bạn bè</div>
     </div>
-    <div class="location widget">
+    <div class="location">
       <i class="location_icon"></i>
       <div class="location_text">Vị trí</div>
+    </div>
+    <div class="feeling">
+      <i class="feeling_icon"></i>
+      <div class="feeling_text">Cảm xúc/Hoạt động</div>
+    </div>
+    <div class="post_button_bottom_area">
+      <button class="post_button_bottom">Đăng</button>
     </div>
   </body>
 </html>
