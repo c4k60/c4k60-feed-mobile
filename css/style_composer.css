@@ -74,6 +74,9 @@ textarea {
   box-sizing: border-box;
   resize: none;
   font-family: -apple-system, sans-serif;
+  color: black;
+}
+textarea::placeholder {
   color: #90949c;
 }
 .photo {
@@ -214,4 +217,19 @@ textarea {
   padding: 80px 30px;
   text-align: center;
   height: 208px;
+}
+.spa {
+  color: white;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.2em;
+  padding: 80px 30px;
+  text-align: center;
+  height: 208px;
+}
+.placeholderText::placeholder {
+  color:black;
+}
+.phWhite::placeholder {
+  color: white;
 }

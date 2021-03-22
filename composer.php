@@ -42,25 +42,71 @@ require $_SERVER['DOCUMENT_ROOT'] . '/require/serverconnect.php';
       </div>
     </div>
     <div id="wdyt_area" class="what_do_you_think">
-      <textarea id="wdyt" placeholder="Bạn đang nghĩ gì?"></textarea>
+      <textarea id="wdyt" placeholder="Bạn đang nghĩ gì?" onkeyup="countChar(this)"></textarea>
     </div>
+  <div style="display: none;" id="main">
     <div class="post_style">
       <div class="no_style post_style_div" onclick="blank()"></div>
       <div class="solid_orange post_style_div" onclick="solid_orange()"></div>
-      <div class="gradient post_style_div"></div>
-      <div class="float post_style_div"></div>
-      <div class="space post_style_div"></div>
-      <div class="love post_style_div"></div>
-      <div class="haha post_style_div"></div>
+      <div class="gradient post_style_div" onclick="gradient()"></div>
+      <div class="float post_style_div" onclick="float()"></div>
+      <div class="space post_style_div" onclick="space()"></div>
+      <div class="love post_style_div" onclick="love()"></div>
+      <div class="haha post_style_div" onclick="haha()"></div>
     </div>
     <script type="text/javascript">
       function solid_orange() {
         document.getElementById("wdyt").classList.add("so");
         document.getElementById("wdyt_area").style = "background-color: rgb(255, 99, 35);";
+        document.getElementById("wdyt").classList.add("placeholderText");
+        document.getElementById("wdyt").classList.remove("spa");
+        document.getElementById("wdyt").classList.remove("phWhite");
+      }
+      function gradient() {
+        document.getElementById("wdyt").classList.add("so");
+        document.getElementById("wdyt_area").style = "background-image: url(/assets/post_style/gradient.jpg);background-size: 100%;";
+        document.getElementById("wdyt").classList.add("placeholderText");
+        document.getElementById("wdyt").classList.remove("spa");
+        document.getElementById("wdyt").classList.remove("phWhite");
+      }
+      function float() {
+        document.getElementById("wdyt").classList.add("spa");
+        document.getElementById("wdyt_area").style = "background-image: url(/assets/post_style/float.png);background-size: 100%;";
+        document.getElementById("wdyt").classList.add("phWhite");
+      }
+      function space() {
+        document.getElementById("wdyt").classList.add("spa");
+        document.getElementById("wdyt_area").style = "background-image: url(/assets/post_style/space.jpg);background-size: 100%;";
+        document.getElementById("wdyt").classList.add("phWhite");
+      }
+      function love() {
+        document.getElementById("wdyt").classList.add("spa");
+        document.getElementById("wdyt_area").style = "background-image: url(/assets/post_style/love.jpg);background-size: 100%;";
+        document.getElementById("wdyt").classList.add("phWhite");
+      }
+      function haha() {
+        document.getElementById("wdyt").classList.add("so");
+        document.getElementById("wdyt_area").style = "background-image: url(/assets/post_style/haha.jpg);background-size: 100%;";
+        document.getElementById("wdyt").classList.add("placeholderText");
+        document.getElementById("wdyt").classList.remove("spa");
+        document.getElementById("wdyt").classList.remove("phWhite");
       }
       function blank() {
         document.getElementById("wdyt").classList.remove("so");
+        document.getElementById("wdyt").classList.remove("spa");
+        document.getElementById("wdyt").classList.remove("phWhite");
+        document.getElementById("wdyt").classList.remove("placeholderText");
+        document.getElementById("wdyt_area").style = "";
       }
+      function countChar(val) {
+        var len = val.value.length;
+        if (len > 130) {
+          // change to blank style
+          blank();
+        } else {
+          // revert to previous style
+        }
+      };
     </script>
     <div class="photo">
       <i class="photo_icon"></i>
@@ -78,8 +124,19 @@ require $_SERVER['DOCUMENT_ROOT'] . '/require/serverconnect.php';
       <i class="feeling_icon"></i>
       <div class="feeling_text">Cảm xúc/Hoạt động</div>
     </div>
+  </div>
+  <center>
+    <img src="assets/loaderIcon.gif" id="loader">
+  </center>
     <div class="post_button_bottom_area">
       <button class="post_button_bottom">Đăng</button>
     </div>
+    <script type="text/javascript">
+      function showMain() {
+        document.getElementById("main").style.display = "block";
+        document.getElementById("loader").style.display = "none";
+      }
+      setTimeout(showMain , 500);
+    </script>
   </body>
 </html>

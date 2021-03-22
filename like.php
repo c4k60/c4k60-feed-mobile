@@ -2,6 +2,10 @@
 session_start();
 require $_SERVER['DOCUMENT_ROOT'] . '/require/serverconnect.php';
 
+$post_id = "";
+$action = "";
+
+if ($_POST) {
 $username = $_SESSION['username'];
 $post_id = $_POST['post_id'];
 $action = $_POST['action'];
@@ -18,5 +22,9 @@ if(!empty($post_id)) {
 			$result = mysqli_query($con, $query);
 		break;
 	}
+}
+} else {
+	echo "What the hell? Did you just found a new easter egg from us?";
+	echo "<br><a href='/'>Go back</a>";
 }
 ?>
