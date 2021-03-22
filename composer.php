@@ -28,7 +28,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/require/serverconnect.php';
   	<div class="upper_back_bar">
       <img class="left_arrow" src="/assets/left-arrow.png" onclick="window.history.back();">
       <div class="create_post_text">Tạo bài viết</div>
-      <button type="submit" class="post_button">Đăng</button>
+      <button onclick="sendPost()" class="post_button">Đăng</button>
     </div>
     <div class="avatar_audience_bar">
       <img src="<?php echo $_SESSION['profile_pic'] ?>" class="avatar">
@@ -41,11 +41,12 @@ require $_SERVER['DOCUMENT_ROOT'] . '/require/serverconnect.php';
         </div>
       </div>
     </div>
+  <form method="GET" action="#" id="composer_form">
     <div id="wdyt_area" class="what_do_you_think">
-      <textarea id="wdyt" placeholder="Bạn đang nghĩ gì?" onkeyup="countChar(this)"></textarea>
+      <textarea id="wdyt" name="content" placeholder="Bạn đang nghĩ gì?" onkeyup="countChar(this)"></textarea>
     </div>
   <div style="display: none;" id="main">
-    <div class="post_style">
+    <div class="post_style" id="post_style">
       <div class="no_style post_style_div" onclick="blank()"></div>
       <div class="solid_orange post_style_div" onclick="solid_orange()"></div>
       <div class="gradient post_style_div" onclick="gradient()"></div>
@@ -53,43 +54,60 @@ require $_SERVER['DOCUMENT_ROOT'] . '/require/serverconnect.php';
       <div class="space post_style_div" onclick="space()"></div>
       <div class="love post_style_div" onclick="love()"></div>
       <div class="haha post_style_div" onclick="haha()"></div>
+      <input type="hidden" id="post_style_input" name="style" value="blank">
     </div>
     <script type="text/javascript">
+      function sendPost() {
+        document.forms["composer_form"].submit();
+      }
+      var currentStyle = "";
       function solid_orange() {
         document.getElementById("wdyt").classList.add("so");
         document.getElementById("wdyt_area").style = "background-color: rgb(255, 99, 35);";
         document.getElementById("wdyt").classList.add("placeholderText");
         document.getElementById("wdyt").classList.remove("spa");
         document.getElementById("wdyt").classList.remove("phWhite");
+        currentStyle = "solid_orange";
+        document.getElementById("post_style_input").value = "solid_orange";
       }
       function gradient() {
         document.getElementById("wdyt").classList.add("so");
-        document.getElementById("wdyt_area").style = "background-image: url(/assets/post_style/gradient.jpg);background-size: 100%;";
+        document.getElementById("wdyt_area").style = "background-image: url(/assets/post_style/gradient.jpg);background-size: cover;";
         document.getElementById("wdyt").classList.add("placeholderText");
         document.getElementById("wdyt").classList.remove("spa");
         document.getElementById("wdyt").classList.remove("phWhite");
+        currentStyle = "gradient";
+        document.getElementById("post_style_input").value = "gradient";
       }
       function float() {
         document.getElementById("wdyt").classList.add("spa");
-        document.getElementById("wdyt_area").style = "background-image: url(/assets/post_style/float.png);background-size: 100%;";
+        document.getElementById("wdyt_area").style = "background-image: url(/assets/post_style/float.png);background-size: cover;";
         document.getElementById("wdyt").classList.add("phWhite");
+        currentStyle = "float";
+        document.getElementById("post_style_input").value = "float";
       }
       function space() {
         document.getElementById("wdyt").classList.add("spa");
-        document.getElementById("wdyt_area").style = "background-image: url(/assets/post_style/space.jpg);background-size: 100%;";
+        document.getElementById("wdyt_area").style = "background-image: url(/assets/post_style/space.jpg);background-size: cover;";
         document.getElementById("wdyt").classList.add("phWhite");
+        currentStyle = "space";
+        document.getElementById("post_style_input").value = "space";
       }
       function love() {
         document.getElementById("wdyt").classList.add("spa");
-        document.getElementById("wdyt_area").style = "background-image: url(/assets/post_style/love.jpg);background-size: 100%;";
+        document.getElementById("wdyt_area").style = "background-image: url(/assets/post_style/love.jpg);background-size: cover;";
         document.getElementById("wdyt").classList.add("phWhite");
+        currentStyle = "love";
+        document.getElementById("post_style_input").value = "love";
       }
       function haha() {
         document.getElementById("wdyt").classList.add("so");
-        document.getElementById("wdyt_area").style = "background-image: url(/assets/post_style/haha.jpg);background-size: 100%;";
+        document.getElementById("wdyt_area").style = "background-image: url(/assets/post_style/haha.jpg);background-size: cover;";
         document.getElementById("wdyt").classList.add("placeholderText");
         document.getElementById("wdyt").classList.remove("spa");
         document.getElementById("wdyt").classList.remove("phWhite");
+        currentStyle = "haha";
+        document.getElementById("post_style_input").value = "haha";
       }
       function blank() {
         document.getElementById("wdyt").classList.remove("so");
@@ -97,14 +115,30 @@ require $_SERVER['DOCUMENT_ROOT'] . '/require/serverconnect.php';
         document.getElementById("wdyt").classList.remove("phWhite");
         document.getElementById("wdyt").classList.remove("placeholderText");
         document.getElementById("wdyt_area").style = "";
+        document.getElementById("post_style_input").value = "blank";
       }
       function countChar(val) {
         var len = val.value.length;
         if (len > 130) {
           // change to blank style
           blank();
+          document.getElementById("post_style").style.display = "none";
         } else {
           // revert to previous style
+          document.getElementById("post_style").style.display = "block";
+          if (currentStyle == "solid_orange") {
+            solid_orange();
+          } else if (currentStyle == "gradient") {
+            gradient();
+          } else if (currentStyle == "float") {
+            float();
+          } else if (currentStyle == "space") {
+            space();
+          } else if (currentStyle == "love") {
+            love();
+          } else if (currentStyle == "haha") {
+            haha();
+          }
         }
       };
     </script>
@@ -129,8 +163,9 @@ require $_SERVER['DOCUMENT_ROOT'] . '/require/serverconnect.php';
     <img src="assets/loaderIcon.gif" id="loader">
   </center>
     <div class="post_button_bottom_area">
-      <button class="post_button_bottom">Đăng</button>
+      <button class="post_button_bottom" type="submit">Đăng</button>
     </div>
+  </form>
     <script type="text/javascript">
       function showMain() {
         document.getElementById("main").style.display = "block";
