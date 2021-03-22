@@ -41,18 +41,27 @@ require $_SERVER['DOCUMENT_ROOT'] . '/require/serverconnect.php';
         </div>
       </div>
     </div>
-    <div class="what_do_you_think">
-      <textarea placeholder="Bạn đang nghĩ gì?"></textarea>
+    <div id="wdyt_area" class="what_do_you_think">
+      <textarea id="wdyt" placeholder="Bạn đang nghĩ gì?"></textarea>
     </div>
     <div class="post_style">
-      <div class="no_style post_style_div"></div>
-      <div class="solid_orange post_style_div"></div>
+      <div class="no_style post_style_div" onclick="blank()"></div>
+      <div class="solid_orange post_style_div" onclick="solid_orange()"></div>
       <div class="gradient post_style_div"></div>
       <div class="float post_style_div"></div>
       <div class="space post_style_div"></div>
       <div class="love post_style_div"></div>
       <div class="haha post_style_div"></div>
     </div>
+    <script type="text/javascript">
+      function solid_orange() {
+        document.getElementById("wdyt").classList.add("so");
+        document.getElementById("wdyt_area").style = "background-color: rgb(255, 99, 35);";
+      }
+      function blank() {
+        document.getElementById("wdyt").classList.remove("so");
+      }
+    </script>
     <div class="photo">
       <i class="photo_icon"></i>
       <div class="photo_text">Ảnh</div>

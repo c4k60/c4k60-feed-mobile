@@ -206,3 +206,12 @@ textarea {
   background-size: auto;
   background-position: 0px 0px;
 }
+.so {
+  color: rgb(0, 0, 0);
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.2em;
+  padding: 80px 30px;
+  text-align: center;
+  height: 208px;
+}
