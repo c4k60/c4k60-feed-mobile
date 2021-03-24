@@ -40,6 +40,62 @@ function number_format_short( $n, $precision = 1 ) {
 
 	return $n_format . $suffix;
 }
+error_reporting(0);
+if(!empty($_POST)) {
+   echo "<meta http-equiv='refresh' content='0'>";
+ $name = $_POST['name'];
+ $content = $_POST['content'];
+ $style = $_POST['style'];
+ date_default_timezone_set('Asia/Ho_Chi_Minh');
+ $time = date('Y-m-d H:i:s');
+ $avatar = $_POST['avatar'];
+ $image = "/images/". $_FILES['userfile']['name']."";
+ $username = $_POST['username'];
+ if (!empty($_FILES['userfile']['name'])){
+    $has_image = 'block';
+ } else {
+    $has_image = 'none';
+ }
+  $errors=array();
+ $allowed_e=array('png','jpg','jpeg');
+ $file_name=$_FILES['userfile']['name'];
+ $file_e=strtolower(pathinfo($file_name,PATHINFO_EXTENSION));
+ $file_s= $_FILES['userfile']['size'];
+ $file_tmp=$_FILES['userfile']['tmp_name'];
+ 
+    
+ if($file_s>5097152){
+   $errors[]='Chỉ có thể upload ảnh <5MB';
+ }
+ if(empty($errors)){
+   move_uploaded_file($file_tmp,'images/'.$file_name);
+   if ($image != "/images/") {
+   $c4id = rand(10000, 99999);
+ } else {
+  $c4id = 0;
+ }
+  $sql = "INSERT INTO tintuc_posts (author, content, timeofpost, has_comment, avatar, has_image, image, username, c4id, style)
+VALUES ('$name', '$content', '$time', 'no', '$avatar', '$has_image', ' $image', '$username', '$c4id', '$style')
+";
+$sql2 = "INSERT INTO images_upload (c4id, username, filename, time_of_upload, caption) VALUES ('$c4id', '$username', '$image', '$time', '$content')";
+if (mysqli_query($conn, $sql)) {
+ echo "<script>console.log('Lệnh SQL thực thi thành công');";
+} else {
+ echo "Error: " . $sql . "" . mysqli_error($conn);
+}
+if ($image != "/images/") {
+mysqli_query($conn, $sql2);
+}
+
+$conn->close();  
+   
+   echo "console.log('Upload ảnh thành công');</script>";
+ }else{
+   foreach($errors as $error){
+echo $error,'<br/>';
+   }
+ }
+} 
 ?>
 <!doctype html>
 <html>
@@ -172,7 +228,7 @@ function number_format_short( $n, $precision = 1 ) {
    	</div>
   	<div class="newsfeed" id="newsfeed">
 <?php
-$sql = "SELECT tintuc_posts.id, tintuc_posts.author, tintuc_posts.content, tintuc_posts.timeofpost, tintuc_posts.has_comment, tintuc_posts.avatar, tintuc_posts.has_image, tintuc_posts.image, tintuc_posts.username, tintuc_posts.c4id, COUNT(tintuc_post_likes.like_id) as likes, GROUP_CONCAT(accounts.name separator '|') as liked_by
+$sql = "SELECT tintuc_posts.id, tintuc_posts.author, tintuc_posts.content, tintuc_posts.timeofpost, tintuc_posts.has_comment, tintuc_posts.avatar, tintuc_posts.has_image, tintuc_posts.image, tintuc_posts.username, tintuc_posts.c4id, tintuc_posts.style, COUNT(tintuc_post_likes.like_id) as likes, GROUP_CONCAT(accounts.name separator '|') as liked_by
         FROM tintuc_posts
         LEFT JOIN tintuc_post_likes
         ON tintuc_posts.id = tintuc_post_likes.liked_post_id
@@ -202,13 +258,45 @@ if (mysqli_num_rows($result) > 0) {
 				</div>
   			</header>
   			<div class="nf_post_body_area">
-  				<div class="nf_post_caption">
-  					<p><?php echo $row['content'] ?></p>
+  				<div class="nf_post_caption" id="caption<?php echo $row['id'] ?>">
+  					<p id="para<?php echo $row['id'] ?>"><?php echo $row['content'] ?></p>
   				</div>
   				<div class="nf_post_image_area" style="display: <?php echo $row['has_image'] ?>">
   					<img src="<?php echo $row['image'] ?>" class="nf_post_image">
   				</div>
   			</div>
+        <input type="hidden" id="post_style<?php echo $row['id'] ?>" value="<?php echo $row['style'] ?>">
+        <script type="text/javascript">
+          var style = $('#post_style<?php echo $row['id'] ?>').val();
+          if (style == "solid_orange") {
+            document.getElementById("caption<?php echo $row['id'] ?>").style.backgroundColor = "rgb(255, 99, 35)";
+            document.getElementById("para<?php echo $row['id'] ?>").classList.add("padding_text");
+            document.getElementById("caption<?php echo $row['id'] ?>").classList.add("bg_text");
+          } else if (style == "gradient") {
+            document.getElementById("caption<?php echo $row['id'] ?>").style.backgroundImage = "url(/assets/post_style/gradient.jpg)";
+            document.getElementById("para<?php echo $row['id'] ?>").classList.add("padding_text");
+            document.getElementById("caption<?php echo $row['id'] ?>").classList.add("bg_text");
+          } else if (style == "float") {
+            document.getElementById("caption<?php echo $row['id'] ?>").style.backgroundImage = "url(/assets/post_style/float.png)";
+            document.getElementById("para<?php echo $row['id'] ?>").classList.add("padding_text");
+            document.getElementById("para<?php echo $row['id'] ?>").classList.add("text_white");
+            document.getElementById("caption<?php echo $row['id'] ?>").classList.add("bg_text");
+          } else if (style == "space") {
+            document.getElementById("caption<?php echo $row['id'] ?>").style.backgroundImage = "url(/assets/post_style/space.jpg)";
+            document.getElementById("para<?php echo $row['id'] ?>").classList.add("padding_text");
+            document.getElementById("caption<?php echo $row['id'] ?>").classList.add("bg_text");
+            document.getElementById("para<?php echo $row['id'] ?>").classList.add("text_white");
+          } else if (style == "love") {
+            document.getElementById("caption<?php echo $row['id'] ?>").style.backgroundImage = "url(/assets/post_style/love.jpg)";
+            document.getElementById("para<?php echo $row['id'] ?>").classList.add("padding_text");
+            document.getElementById("caption<?php echo $row['id'] ?>").classList.add("bg_text");
+            document.getElementById("para<?php echo $row['id'] ?>").classList.add("text_white");
+          } else if (style == "haha") {
+            document.getElementById("caption<?php echo $row['id'] ?>").style.backgroundImage = "url(/assets/post_style/haha.jpg)";
+            document.getElementById("para<?php echo $row['id'] ?>").classList.add("padding_text");
+            document.getElementById("caption<?php echo $row['id'] ?>").classList.add("bg_text");
+          }
+        </script>
   			<footer class="nf_post_reaction_area">
   				<div class="user_liked" id="user_liked<?php echo $row['id'] ?>" style="display: none;">
   					<span class="fa-stack">

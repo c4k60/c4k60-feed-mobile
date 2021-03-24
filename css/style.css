@@ -471,3 +471,20 @@ hr {
 	display: inline-block;
 	margin-left: 6px;
 }
+.padding_text {
+  color: rgba(0,0,0,1.00);
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.2000em;
+  padding: 50px 30px;
+  text-align: center;
+  align-self: auto;
+}
+.bg_text {
+  background-position: center;
+  background-size: cover;
+  position: relative;
+}
+.text_white {
+  color: white;
+}

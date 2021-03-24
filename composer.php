@@ -41,13 +41,13 @@ require $_SERVER['DOCUMENT_ROOT'] . '/require/serverconnect.php';
         </div>
       </div>
     </div>
-  <form method="GET" action="#" id="composer_form">
+  <form method="POST" action="index.php" id="composer_form">
     <div id="wdyt_area" class="what_do_you_think">
       <textarea id="wdyt" name="content" placeholder="Bạn đang nghĩ gì?" onkeyup="countChar(this)"></textarea>
     </div>
   <div style="display: none;" id="main">
     <div class="post_style" id="post_style">
-      <div class="no_style post_style_div" onclick="blank()"></div>
+      <div class="no_style post_style_div" onclick="blank();currentStyle = 'blank';"></div>
       <div class="solid_orange post_style_div" onclick="solid_orange()"></div>
       <div class="gradient post_style_div" onclick="gradient()"></div>
       <div class="float post_style_div" onclick="float()"></div>
@@ -55,8 +55,17 @@ require $_SERVER['DOCUMENT_ROOT'] . '/require/serverconnect.php';
       <div class="love post_style_div" onclick="love()"></div>
       <div class="haha post_style_div" onclick="haha()"></div>
       <input type="hidden" id="post_style_input" name="style" value="blank">
+      <input type="hidden" name="name" value="<?php echo $_SESSION['name'] ?>">
+      <input type="hidden" name="avatar" value="<?php echo $_SESSION['profile_pic'] ?>">
+      <input type="hidden" name="username" value="<?php echo $_SESSION['username'] ?>">
+    </div>
+    <div class="custom-file" id="custom-file" style="display: none;">
+      <input type="file" class="custom-file-input" name="userfile[]" id="customFile">
     </div>
     <script type="text/javascript">
+      function showUpload() {
+        document.getElementById("custom-file").style.display = "block";
+      }
       function sendPost() {
         document.forms["composer_form"].submit();
       }
@@ -138,11 +147,13 @@ require $_SERVER['DOCUMENT_ROOT'] . '/require/serverconnect.php';
             love();
           } else if (currentStyle == "haha") {
             haha();
+          } else if (currentStyle == "blank") {
+            blank();
           }
         }
       };
     </script>
-    <div class="photo">
+    <div class="photo" onclick="showUpload()">
       <i class="photo_icon"></i>
       <div class="photo_text">Ảnh</div>
     </div>
