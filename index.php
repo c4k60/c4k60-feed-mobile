@@ -40,7 +40,7 @@ function number_format_short( $n, $precision = 1 ) {
 
 	return $n_format . $suffix;
 }
-error_reporting(0);
+
 if(!empty($_POST)) {
    echo "<meta http-equiv='refresh' content='0'>";
  $name = $_POST['name'];
@@ -168,12 +168,12 @@ echo $error,'<br/>';
     	<i class="fas fa-user-friends friends_icon"></i>
     	<i class="fas fa-comment chat_icon"></i>
     	<i class="fas fa-bell noti_icon"></i>
-    	<i class="fas fa-bars menu_icon"></i>
+    	<i class="fas fa-bars menu_icon" onclick="location.href='menu.php'"></i>
     </div>
     <div class="what_do_you_think">
       <img src="<?php echo $_SESSION['profile_pic'] ?>" class="profile_pic_wdyt">
       <div class="wdyt_box" onclick="location.href='composer.php'">Bạn đang nghĩ gì?</div>
-      <div class="wdyt_photo_icon_area">
+      <div class="wdyt_photo_icon_area" onclick="location.href='composer.php?image_upload=block'">
         <i class="far fa-images wdyt_photo_icon"></i>
         <div class="wdyt_photo_text">Hình ảnh</div>
       </div>

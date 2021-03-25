@@ -6,6 +6,10 @@ if (!isset($_SESSION['loggedin'])) {
   header('Location: /login');
 }
 require $_SERVER['DOCUMENT_ROOT'] . '/require/serverconnect.php';
+$custom_file_display = "none";
+if ($_GET) {
+  $custom_file_display = $_GET['image_upload'];
+}
 ?>
 <!doctype html>
 <html>
@@ -30,6 +34,9 @@ require $_SERVER['DOCUMENT_ROOT'] . '/require/serverconnect.php';
       <div class="create_post_text">Tạo bài viết</div>
       <button onclick="sendPost()" class="post_button">Đăng</button>
     </div>
+    <div class="error_area" id="error" style="display: none;">
+      Vui lòng thêm nội dung vào trạng thái của bạn trước khi đăng
+    </div>
     <div class="avatar_audience_bar">
       <img src="<?php echo $_SESSION['profile_pic'] ?>" class="avatar">
       <div class="name_audience">
@@ -41,7 +48,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/require/serverconnect.php';
         </div>
       </div>
     </div>
-  <form method="POST" action="index.php" id="composer_form">
+  <form method="POST" action="index.php" id="composer_form" enctype="multipart/form-data">
     <div id="wdyt_area" class="what_do_you_think">
       <textarea id="wdyt" name="content" placeholder="Bạn đang nghĩ gì?" onkeyup="countChar(this)"></textarea>
     </div>
@@ -59,15 +66,21 @@ require $_SERVER['DOCUMENT_ROOT'] . '/require/serverconnect.php';
       <input type="hidden" name="avatar" value="<?php echo $_SESSION['profile_pic'] ?>">
       <input type="hidden" name="username" value="<?php echo $_SESSION['username'] ?>">
     </div>
-    <div class="custom-file" id="custom-file" style="display: none;">
-      <input type="file" class="custom-file-input" name="userfile[]" id="customFile">
+    <div class="custom-file" id="custom-file" style="display: <?php echo $custom_file_display ?>;padding: 0 10px 5px;">
+      <input type="file" class="custom-file-input" name="userfile" id="customFile">
     </div>
     <script type="text/javascript">
       function showUpload() {
         document.getElementById("custom-file").style.display = "block";
       }
       function sendPost() {
-        document.forms["composer_form"].submit();
+          var inputField = document.getElementById("wdyt").value;
+          inputField = inputField.replace(/^\s+/, '').replace(/\s+$/, '');
+          if(inputField == ""){
+              document.getElementById("error").style.display = "block";
+          } else {
+            document.forms["composer_form"].submit();
+          }
       }
       var currentStyle = "";
       function solid_orange() {
@@ -174,7 +187,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/require/serverconnect.php';
     <img src="assets/loaderIcon.gif" id="loader">
   </center>
     <div class="post_button_bottom_area">
-      <button class="post_button_bottom" type="submit">Đăng</button>
+      <button class="post_button_bottom" onclick="sendPost()" type="button">Đăng</button>
     </div>
   </form>
     <script type="text/javascript">

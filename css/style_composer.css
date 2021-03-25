@@ -233,3 +233,10 @@ textarea::placeholder {
 .phWhite::placeholder {
   color: white;
 }
+.error_area {
+  padding: 8px;
+  background-color: #ffebe8;
+  color: #6d220d;
+  border-bottom: 1px solid #dd3c10;
+  font-size: 14px;
+}
