@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th3 18, 2021 lúc 04:04 PM
--- Phiên bản máy phục vụ: 10.4.17-MariaDB
--- Phiên bản PHP: 8.0.1
+-- Máy chủ: localhost
+-- Thời gian đã tạo: Th3 25, 2021 lúc 03:10 PM
+-- Phiên bản máy phục vụ: 10.4.14-MariaDB
+-- Phiên bản PHP: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -91,7 +91,16 @@ INSERT INTO `images_upload` (`id`, `c4id`, `username`, `filename`, `time_of_uplo
 (1, 21110, 'tunnaduong', '/images/tunna.jpg', '2021-02-06 17:50:00', ''),
 (2, 25896, 'tunnaduong', '/images/PHQ_2410-min.jpg', '2021-02-07 18:24:43', ''),
 (3, 53132, 'tunnaduong', 'images/pink-flower-tree-facebook-cover-photo.jpg', '2021-02-07 21:01:43', 'sdsd'),
-(5, 12806, 'tunnaduong', '/images/default_pic.jpg', '2021-02-07 21:15:42', 'concac');
+(5, 12806, 'tunnaduong', '/images/default_pic.jpg', '2021-02-07 21:15:42', 'concac'),
+(6, 41397, 'tunnaduong', '/images/èkjlksd.png', '2021-03-25 12:03:09', 'Khoa học kĩ thuật'),
+(7, 28576, 'tunnaduong', '/images/75398383_515895812592428_205755807088771072_n.jpg', '2021-03-25 12:05:21', 'nice'),
+(8, 52418, 'tunnaduong', '/images/batan.jpg', '2021-03-25 12:05:38', ''),
+(9, 70244, 'tunnaduong', '/images/142666639_1289218368131099_2558979508519694682_n.jpg', '2021-03-25 12:06:01', 'xinh'),
+(10, 22744, 'tunnaduong', '/images/èkjlksd.png', '2021-03-25 12:09:10', 'khkt'),
+(11, 22029, 'tunnaduong', '/images/7E6F9B68-27EA-4D8E-BC7A-EB93CFAF2116.jpeg', '2021-03-25 12:14:20', 'đếm xem có bao nhiêu tunna trong ảnh ik'),
+(12, 65416, 'tunnaduong', '/images/image.jpg', '2021-03-25 12:18:01', 'chơi bài đi'),
+(13, 98539, 'tunnaduong', '/images/85DF3E17-501A-4DE0-A70F-02D57A3C2C2F.jpeg', '2021-03-25 12:18:53', 'thằng mọi da đen đang nhảy'),
+(14, 12092, 'tunnaduong', '/images/Picture 1.png', '2021-03-25 13:23:20', 'Dự án khoa học kĩ thuật');
 
 -- --------------------------------------------------------
 
@@ -160,6 +169,7 @@ CREATE TABLE `tintuc_posts` (
   `author` varchar(99) NOT NULL,
   `content` text NOT NULL,
   `timeofpost` datetime NOT NULL,
+  `style` varchar(20) NOT NULL,
   `has_comment` varchar(3) NOT NULL,
   `avatar` varchar(999) NOT NULL,
   `has_image` varchar(7) NOT NULL,
@@ -172,15 +182,29 @@ CREATE TABLE `tintuc_posts` (
 -- Đang đổ dữ liệu cho bảng `tintuc_posts`
 --
 
-INSERT INTO `tintuc_posts` (`id`, `author`, `content`, `timeofpost`, `has_comment`, `avatar`, `has_image`, `image`, `username`, `c4id`) VALUES
-(25, 'Dương Tùng Anh', 'Hôm nay là một ngày đẹp trời!', '2021-02-06 10:07:03', 'no', '/images/tunna.jpg', 'none', ' images/', 'tunnaduong', 0),
-(27, 'Dương Tùng Anh', 'spam cực dài\r\nspam cực dài\r\nspam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dài', '2021-02-06 13:40:47', 'no', '/images/tunna.jpg', 'none', ' images/', 'tunnaduong', 0),
-(28, 'Dương Tùng Anh', 'spam again :>', '2021-02-06 13:42:06', 'no', '/images/tunna.jpg', 'none', ' images/', 'tunnaduong', 0),
-(31, 'Dương Tùng Anh', 't', '2021-02-06 17:13:06', 'no', '/images/tunna.jpg', 'none', ' images/', 'tunnaduong', 0),
-(39, 'Dương Tùng Anh', 'sdsd', '2021-02-07 21:15:12', 'no', '/images/tunna.jpg', 'none', ' /images/', 'tunnaduong', 0),
-(41, 'Dương Tùng Anh', 'wtf is going on', '2021-02-13 22:42:46', 'no', '/images/tunna.jpg', 'none', ' /images/', 'tunnaduong', 0),
-(42, 'Hoàng Phát', 'Tôi bị điên bẩm sinh', '2021-02-28 21:41:14', 'no', '/images/phatdeptrai.jpg', 'none', ' /images/', 'hoangphat', 0),
-(43, 'Hoàng Phát', '1 like mai nghỉ học', '2021-02-28 21:46:30', 'no', '/images/phatdeptrai.jpg', 'none', ' /images/', 'hoangphat', 0);
+INSERT INTO `tintuc_posts` (`id`, `author`, `content`, `timeofpost`, `style`, `has_comment`, `avatar`, `has_image`, `image`, `username`, `c4id`) VALUES
+(25, 'Dương Tùng Anh', 'Hôm nay là một ngày đẹp trời!', '2021-02-06 10:07:03', '', 'no', '/images/tunna.jpg', 'none', ' images/', 'tunnaduong', 0),
+(27, 'Dương Tùng Anh', 'spam cực dài\r\nspam cực dài\r\nspam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dàispam cực dài', '2021-02-06 13:40:47', '', 'no', '/images/tunna.jpg', 'none', ' images/', 'tunnaduong', 0),
+(28, 'Dương Tùng Anh', 'spam again :>', '2021-02-06 13:42:06', '', 'no', '/images/tunna.jpg', 'none', ' images/', 'tunnaduong', 0),
+(31, 'Dương Tùng Anh', 't', '2021-02-06 17:13:06', '', 'no', '/images/tunna.jpg', 'none', ' images/', 'tunnaduong', 0),
+(39, 'Dương Tùng Anh', 'sdsd', '2021-02-07 21:15:12', '', 'no', '/images/tunna.jpg', 'none', ' /images/', 'tunnaduong', 0),
+(41, 'Dương Tùng Anh', 'wtf is going on', '2021-02-13 22:42:46', '', 'no', '/images/tunna.jpg', 'none', ' /images/', 'tunnaduong', 0),
+(42, 'Hoàng Phát', 'Tôi bị điên bẩm sinh', '2021-02-28 21:41:14', '', 'no', '/images/phatdeptrai.jpg', 'none', ' /images/', 'hoangphat', 0),
+(43, 'Hoàng Phát', '1 like mai nghỉ học', '2021-02-28 21:46:30', '', 'no', '/images/phatdeptrai.jpg', 'none', ' /images/', 'hoangphat', 0),
+(44, 'Dương Tùng Anh', 'tùng anh rất chi là đẹp trai', '2021-03-23 13:03:43', '', 'no', '/images/tunna.jpg', 'none', ' /images/', 'tunnaduong', 0),
+(45, 'Dương Tùng Anh', 'đây là một status mẫu xdddd buh buh lmao', '2021-03-23 13:05:08', '', 'no', '/images/tunna.jpg', 'none', ' /images/', 'tunnaduong', 0),
+(46, 'Dương Tùng Anh', 'Đây là một dòng status sử dụng style solid_orange', '2021-03-23 13:07:51', 'solid_orange', 'no', '/images/tunna.jpg', 'none', ' /images/', 'tunnaduong', 0),
+(47, 'Dương Tùng Anh', 'Đây là một status sử dụng style gradient', '2021-03-23 13:40:24', 'gradient', 'no', '/images/tunna.jpg', 'none', ' /images/', 'tunnaduong', 0),
+(48, 'Dương Tùng Anh', 'Đây là một status được áp dụng style space', '2021-03-23 13:46:54', 'space', 'no', '/images/tunna.jpg', 'none', ' /images/', 'tunnaduong', 0),
+(49, 'Dương Tùng Anh', 'còn đây là style love', '2021-03-23 13:50:13', 'love', 'no', '/images/tunna.jpg', 'none', ' /images/', 'tunnaduong', 0),
+(50, 'Dương Tùng Anh', 'và đây là một style mang tên haha', '2021-03-23 13:50:36', 'haha', 'no', '/images/tunna.jpg', 'none', ' /images/', 'tunnaduong', 0),
+(51, 'Anh tùng', 'ai cho tôi lương thiện :))?', '2021-03-23 13:56:21', 'love', 'no', '/images/default_pic.jpg', 'none', ' /images/', 'tunganh03', 0),
+(52, 'Dương Tùng Anh', 'tùng anh đẹp trai vcl luôn ấy nhở tùng anh đẹp trai vcl luôn ấy nhở tùng anh đẹp trai vcl luôn ấy nhở tùng anh đẹp trai vcl luôn', '2021-03-24 12:35:59', 'space', 'no', '/images/tunna.jpg', 'none', ' /images/', 'tunnaduong', 0),
+(56, 'Dương Tùng Anh', 'nice', '2021-03-25 12:05:21', 'blank', 'no', '/images/tunna.jpg', 'block', ' /images/75398383_515895812592428_205755807088771072_n.jpg', 'tunnaduong', 28576),
+(60, 'Dương Tùng Anh', 'đếm xem có bao nhiêu tunna trong ảnh ik', '2021-03-25 12:14:20', 'blank', 'no', '/images/tunna.jpg', 'block', ' /images/7E6F9B68-27EA-4D8E-BC7A-EB93CFAF2116.jpeg', 'tunnaduong', 22029),
+(61, 'Dương Tùng Anh', 'chơi bài đi', '2021-03-25 12:18:01', 'solid_orange', 'no', '/images/tunna.jpg', 'block', ' /images/image.jpg', 'tunnaduong', 65416),
+(62, 'Dương Tùng Anh', 'thằng mọi da đen đang nhảy', '2021-03-25 12:18:53', 'love', 'no', '/images/tunna.jpg', 'block', ' /images/85DF3E17-501A-4DE0-A70F-02D57A3C2C2F.jpeg', 'tunnaduong', 98539),
+(65, 'Dương Tùng Anh', 'test', '2021-03-25 13:38:20', 'gradient', 'no', '/images/tunna.jpg', 'none', ' /images/', 'tunnaduong', 0);
 
 -- --------------------------------------------------------
 
@@ -199,17 +223,30 @@ CREATE TABLE `tintuc_post_likes` (
 --
 
 INSERT INTO `tintuc_post_likes` (`like_id`, `username_of_like`, `liked_post_id`) VALUES
-(186, 'tunnaduong', 43),
-(187, 'tunnaduong', 42),
-(188, 'tunnaduong', 39),
-(190, 'tunganh03', 42),
-(192, 'tunganh03', 27),
-(198, 'tunganh03', 43),
-(204, 'tunganh03', 39),
-(205, 'tunganh03', 31),
-(206, 'tunganh03', 28),
-(207, 'tunganh03', 41),
-(208, 'tunganh03', 25);
+(165, 'tunnaduong', 25),
+(167, 'tunnaduong', 43),
+(168, 'tunnaduong', 42),
+(169, 'tunnaduong', 31),
+(173, 'tunnaduong', 44),
+(177, 'tunnaduong', 47),
+(178, 'tunnaduong', 50),
+(179, 'tunnaduong', 49),
+(180, 'tunganh03', 50),
+(181, 'tunganh03', 49),
+(191, 'tunganh03', 48),
+(192, 'tunganh03', 46),
+(193, 'tunganh03', 45),
+(194, 'tunganh03', 44),
+(196, 'tunnaduong', 51),
+(197, 'tunganh03', 51),
+(207, 'tunnaduong', 52),
+(216, 'tunnaduong', 56),
+(224, 'tunnaduong', 41),
+(225, 'tunnaduong', 41),
+(242, 'tunnaduong', 61),
+(245, 'tunnaduong', 60),
+(251, 'tunnaduong', 65),
+(252, 'tunnaduong', 62);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -259,7 +296,7 @@ ALTER TABLE `accounts`
 -- AUTO_INCREMENT cho bảng `images_upload`
 --
 ALTER TABLE `images_upload`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT cho bảng `messages`
@@ -271,13 +308,13 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT cho bảng `tintuc_posts`
 --
 ALTER TABLE `tintuc_posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT cho bảng `tintuc_post_likes`
 --
 ALTER TABLE `tintuc_post_likes`
-  MODIFY `like_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=209;
+  MODIFY `like_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=253;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
